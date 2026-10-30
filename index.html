@@ -80,7 +80,7 @@
 
     .btn-gold {
       background: linear-gradient(135deg, #d4af37, #c9a227);
-      color: #1a1a1a;
+      color: #fff !important;
       border: none;
       padding: 10px 28px;
       border-radius: 50px;
@@ -90,9 +90,14 @@
 
     .btn-gold:hover {
       background: linear-gradient(135deg, #c9a227, #b8860b);
-      color: #1a1a1a;
+      color: #fff !important;
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(201, 162, 39, 0.35);
+    }
+
+    /* Bag icon black inside Add to Cart button */
+    .btn-gold .fa-shopping-bag {
+      color: #000 !important;
     }
 
     /* ========== HERO SLIDER ========== */
@@ -827,9 +832,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column">
-      <div id="cartItems" class="flex-grow-1">
-        <!-- Cart items load here -->
-      </div>
+      <div id="cartItems" class="flex-grow-1"></div>
       
       <div class="border-top pt-3 mt-3">
         <div class="d-flex justify-content-between mb-3">
@@ -885,7 +888,8 @@
                 ${product.oldPrice ? `<span class="product-old-price">₹${product.oldPrice.toLocaleString()}</span>` : ''}
               </div>
               <button class="btn btn-gold btn-sm w-100" onclick="addToCart(${product.id})">
-                <i class="fas fa-shopping-bag me-1"></i> Add to Cart
+                <i class="fas fa-shopping-bag me-1" style="color:#000;"></i>
+                <span style="color:#fff;">Add to Cart</span>
               </button>
             </div>
           </div>
@@ -1004,31 +1008,20 @@
       this.reset();
     });
 
-   
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-
-        // Ignore empty hash links
         if (!href || href === '#') {
-            e.preventDefault();
-            return;
+          e.preventDefault();
+          return;
         }
-
         const target = document.querySelector(href);
-
         if (target) {
-            e.preventDefault();
-
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+      });
     });
-});
-
 
     renderProducts();
   </script>
